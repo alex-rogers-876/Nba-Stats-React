@@ -19,12 +19,12 @@ import Button from '@material-ui/core/Button';
     paddingTop: '56.25%', // 16:9
   },
 };
-const Team = inject("shop")(
-    observer(({ shop }) => (
+const Team = inject("nba")(
+    observer(({ nba }) => (
         <section className="Page-team">
 <div className={"root"}>
       <Grid container spacing={24}>
-                {shop.getTeams.map(book => <BookEntry key={book.TEAM_ID} book={book} />)}
+                {nba.getTeams.map(book => <BookEntry key={book.TEAM_ID} book={book} />)}
 
   </Grid>
   </div>
@@ -32,8 +32,8 @@ const Team = inject("shop")(
     ))
 )
 
-const BookEntry = inject("shop")(
-    observer(({ book, shop }) => (
+const BookEntry = inject("nba")(
+    observer(({ book, nba }) => (
         <Grid item md={3} sm={4} xs={12}>
         <Card className={""} style={styles.card}>
         <CardMedia
@@ -49,7 +49,7 @@ const BookEntry = inject("shop")(
                 onClick={e => {
                     debugger;
                     e.preventDefault()
-                    shop.view.openTeamPage(book)
+                    nba.view.openTeamPage(book)
                     return false
                 }}
             >

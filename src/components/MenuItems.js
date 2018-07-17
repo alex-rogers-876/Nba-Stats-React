@@ -14,14 +14,14 @@ import List from '@material-ui/core/List';
  class MailFolderListItems extends Component{
 
 render(){
-    const  shop  = this.props.shop
+    const  nba  = this.props.nba
     return(
   <div>
       <List>
     <ListItem button onClick={e => {
                     debugger;
                     e.preventDefault()
-                    shop.view.openTeamsPage()
+                    nba.view.openTeamsPage()
                     return false
                 }}>
       <ListItemIcon>

@@ -1,16 +1,12 @@
 import { types, getEnv } from "mobx-state-tree"
-import { BookStore } from "./BookStore"
-import { CartStore } from "./CartStore"
+
 import { ViewStore } from "./ViewStore"
 import { NbaStore } from "./NbaStore"
 import { TeamStore } from "./TeamStore"
 import { PlayerStore } from "./PlayerStore"
 import { WSAEWOULDBLOCK } from "constants";
-export const ShopStore = types
-    .model("ShopStore", {
-        bookStore: types.optional(BookStore, {
-            books: {}
-        }),
+export const NbaGeneralStore = types
+    .model("NbaGeneralStore", {
         nbaStore: types.optional(NbaStore, {
             nba: {}
         }),
@@ -19,9 +15,6 @@ export const ShopStore = types
         }),
         teamStore: types.optional(TeamStore, {
             teams: {}
-        }),
-        cart: types.optional(CartStore, {
-            entries: []
         }),
         view: types.optional(ViewStore, {})
     })
@@ -33,19 +26,14 @@ export const ShopStore = types
             return getEnv(self).alert
         },
         get isLoading() {
-            return self.bookStore.isLoading
-        },
-        get books() {
-            return self.bookStore.books
+            debugger
+            return self.teamStore.isLoading
         },
         get teams() {
             return self.teamStore.teams
         },
         get players() {
             return self.playerStore.players
-        },
-        get sortedAvailableBooks() {
-            return self.bookStore.sortedAvailableBooks
         },
         get sortedAvailableNba() {
             return self.playerStore.sortedAvailablePlayers
@@ -60,7 +48,6 @@ export const ShopStore = types
     }))
     .actions(self => ({
         afterCreate() {
-            self.bookStore.loadBooks()
             self.teamStore.loadBooks()
            
         },

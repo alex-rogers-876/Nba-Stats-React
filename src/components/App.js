@@ -3,11 +3,10 @@ import { observer, inject } from "mobx-react"
 import logo from "../logo.svg"
 import "./App.css"
 
-import Books from "./Books"
-import BookDetails from "./BookDetails"
+
 import PlayerList from "./TeamDetails"
 import PlayerDetails from "./PlayerDetails"
-import Cart from "./Cart"
+
 import DevTools from "./DevTools"
 import Nba from "./nba";
 import Team from "./Team";
@@ -17,14 +16,14 @@ const styles = theme => ({
     // Load app bar information from the theme
     toolbar: theme.mixins.toolbar,
   });
-const App = inject("shop")(
-    observer(({ shop }) => (
+const App = inject("nba")(
+    observer(({ nba }) => (
         <div>
             <div className="App">
-                <PersistentDrawer shop={shop}>
+                <PersistentDrawer nba={nba}>
                 </PersistentDrawer >
                 
-                {shop.isLoading ? <h1>Loading...</h1> : renderPage(shop.view)}
+                {nba.isLoading ? <h1>Loading...</h1> : renderPage(nba.view)}
                 
             </div>
             
@@ -34,14 +33,6 @@ const App = inject("shop")(
 
 function renderPage(viewStore) {
     switch (viewStore.page) {
-        case "books":
-            return <Books />
-        case "book":
-            const book = viewStore.selectedBook
-            if (book) return <BookDetails book={book} />
-            else return <h1>Book ${viewStore.selectedBookId} not found!</h1>
-        case "cart":
-            return <Cart />
             case "nba":
             return <Nba />
             case "teams":

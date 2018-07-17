@@ -121,7 +121,7 @@ class PersistentDrawer extends React.Component {
   render() {
     const { classes, theme } = this.props;
     const { anchor, open } = this.state;
-    const  shop  = this.props.shop
+    const  nba  = this.props.nba
     debugger
     const drawer = (
       <Drawer
@@ -138,7 +138,7 @@ class PersistentDrawer extends React.Component {
           </IconButton>
         </div>
         <Divider />
-        <MailFolderListItems shop={shop}/>
+        <MailFolderListItems nba={nba}/>
 
 
       </Drawer>

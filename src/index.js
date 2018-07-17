@@ -16,10 +16,10 @@ import createRouter from "./utils/router"
 import App from "./components/App"
 import "./index.css"
 
-import { ShopStore } from "./stores/ShopStore"
+import { NbaGeneralStore } from "./stores/NbaGeneralStore"
 
 const fetcher = url => window.fetch(url).then(response => response.json())
-const shop = ShopStore.create(
+const nba = NbaGeneralStore.create(
     {},
     {
         fetch: fetcher,
@@ -37,7 +37,7 @@ const history = {
  * Rendering
  */
 ReactDOM.render(
-    <Provider shop={shop} history={history}>
+    <Provider nba={nba} history={history}>
         <App />
     </Provider>,
     document.getElementById("root")
@@ -48,19 +48,18 @@ ReactDOM.render(
  */
 
 reaction(
-    () => shop.view.currentUrl,
+    () => nba.view.currentUrl,
     path => {
         if (window.location.pathname !== path) window.history.pushState(null, null, path)
     }
 )
 
 const router = createRouter({
-    "/book/:bookId": ({ bookId }) => shop.view.openBookPageById(bookId),
-    "/team/:teamId": ({ teamId }) => shop.view.openTeamPagebyId(teamId),
-    "/cart": shop.view.openCartPage,
-    "/nba": shop.view.openNbaPage,
-    "/teams": shop.view.openTeamsPage,
-    "/": shop.view.openBooksPage
+    "/team/:teamId": ({ teamId }) => nba.view.openTeamPagebyId(teamId),
+    "/cart": nba.view.openCartPage,
+    "/nba": nba.view.openNbaPage,
+    "/teams": nba.view.openTeamsPage,
+    "/": nba.view.openTeamsPage
 })
 
 window.onpopstate = function historyChange(ev) {
@@ -71,7 +70,7 @@ router(window.location.pathname)
 
 // ---------------
 
-window.shop = shop // for playing around with the console
+window.nba = nba // for playing around with the console
 
 /**
  * Poor man's effort of "DevTools" to demonstrate the api:
@@ -80,40 +79,40 @@ window.shop = shop // for playing around with the console
 let recording = false // supress recording history when replaying
 
 onSnapshot(
-    shop,
+    nba,
     s =>
         recording &&
         history.snapshots.unshift({
             data: s,
             replay() {
                 recording = false
-                applySnapshot(shop, this.data)
+                applySnapshot(nba, this.data)
                 recording = true
             }
         })
 )
 onPatch(
-    shop,
+    nba,
     s =>
         recording &&
         history.patches.unshift({
             data: s,
             replay() {
                 recording = false
-                applyPatch(shop, this.data)
+                applyPatch(nba, this.data)
                 recording = true
             }
         })
 )
 onAction(
-    shop,
+    nba,
     s =>
         recording &&
         history.actions.unshift({
             data: s,
             replay() {
                 recording = false
-                applyAction(shop, this.data)
+                applyAction(nba, this.data)
                 recording = true
             }
         })
@@ -121,11 +120,11 @@ onAction(
 
 // add initial snapshot
 history.snapshots.push({
-    data: getSnapshot(shop),
+    data: getSnapshot(nba),
     replay() {
         // TODO: DRY
         recording = false
-        applySnapshot(shop, this.data)
+        applySnapshot(nba, this.data)
         recording = true
     }
 })

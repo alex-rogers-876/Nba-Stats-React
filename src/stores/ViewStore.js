@@ -7,11 +7,11 @@ export const ViewStore = types
         selectedPlayerId: ""
     })
     .views(self => ({
-        get shop() {
+        get nba() {
             return getParent(self)
         },
         get isLoading() {
-            return self.shop.isLoading
+            return self.nba.isLoading
         },
         get currentUrl() {
             switch (self.page) {

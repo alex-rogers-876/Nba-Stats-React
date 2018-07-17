@@ -42,6 +42,7 @@ export const TeamStore = types
 
         const loadBooks = flow(function* loadBooks() {
             try {
+                debugger
                 const json = yield self.shop.fetch("/team.json")
                 
                 updateBooks(json)
