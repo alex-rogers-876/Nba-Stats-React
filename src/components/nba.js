@@ -1,7 +1,7 @@
 import React from "react"
 import { observer, inject } from "mobx-react"
 
-const Nba = inject("shop")(
+const Nba = inject("nba")(
     observer(({ shop }) => (
         <section className="Page-books">
             <h1>Available books</h1>
@@ -12,7 +12,7 @@ const Nba = inject("shop")(
     ))
 )
 
-const BookEntry = inject("shop")(
+const BookEntry = inject("nba")(
     observer(({ book, shop }) => (
         <li>
             

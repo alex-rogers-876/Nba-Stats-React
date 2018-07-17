@@ -17,8 +17,8 @@ const styles = ({
     },
   });
 
-const PlayerDetails = inject("shop")(
-    observer(({book, shop }) => (
+const PlayerDetails = inject("nba")(
+    observer(({book, nba }) => (
 <Paper className={styles.root} style={styles.root}>
       <Table className={styles.table} style={styles.table}>
         <TableHead>
@@ -51,7 +51,9 @@ const PlayerDetails = inject("shop")(
           </TableRow>
         </TableHead>
         <TableBody>
-          {shop.stats.map(n => {
+          
+          {nba.stats.map(n => {
+            debugger
             return (
               <TableRow key={n.season_id}>
                 <TableCell component="th" scope="row">

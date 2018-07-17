@@ -42,6 +42,7 @@ export const NbaGeneralStore = types
             return self.teamStore.getTeams
         },
         get stats(){
+            debugger
             return self.nbaStore.sortedAvailableNba
         },
 

@@ -17,46 +17,45 @@ const styles = {
       paddingTop: '56.25%', // 16:9
     },
   };
-const PlayerList = inject("shop")(
-    observer(({book, shop }) => (
+const PlayerList = inject("nba")(
+    observer(({book, nba }) => (
 <Grid container spacing={24}>
-                {shop.sortedAvailableNba.map(book => <PlayerEntry key={book.player_id} book={book} />)}
+                {nba.sortedAvailableNba.map(book => <PlayerEntry key={book.player_id} book={book} />)}
 </Grid>
     ))
 )
 
-const PlayerEntry = inject("shop")(
-    observer(({ book, shop }) => (
-        <Grid item md={3} sm={4} xs={12}>
-        <Card className={""} style={styles.card}>
-        <CardMedia
-          className={""}
-          style={styles.media}
-          image={book.photoUrl}
-          title={book.TEAM_ID}
-        />
-        <CardActions>
-          <Button size="small" color="primary">
-          <a
-                href={`/player/${book.player_id}`}
-                onClick={e => {
-                    debugger;
-                    e.preventDefault()
-                    shop.view.openPlayerPage(book)
-                    return false
-                }}
-            >
+const PlayerEntry =inject("nba")(
+  observer(({ book, nba }) => (
+      <Grid item md={3} sm={4} xs={12}>
+      <Card className={""} style={styles.card}>
+      <CardMedia
+        className={""}
+        style={styles.media}
+        image={book.photoUrl}
+        title={book.TEAM_ID}
+      />
+      <CardActions>
+        <Button size="small" color="primary">
+        <a
+              href={`/player/${book.player_id}`}
+              onClick={e => {
+                  debugger;
+                  e.preventDefault()
+                  nba.view.openPlayerPage(book)
+                  return false
+              }}
+          >
+          Visit Player
+         </a>
+        </Button>
+      </CardActions>
+    </Card>
+        
 
-           </a>
-          </Button>
-        </CardActions>
-      </Card>
-          
 
-
-        </Grid>
-
-    ))
+      </Grid>
+  ))
 )
 
 export default PlayerList

@@ -63,7 +63,6 @@ class ResponsiveDrawer extends React.Component {
   };
 
   render() {
-      debugger
     const { classes, theme } = this.props;
 
     const drawer = 

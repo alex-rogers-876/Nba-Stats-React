@@ -55,8 +55,8 @@ reaction(
 )
 
 const router = createRouter({
+    "/player/:playerId": ({ teamId }) => nba.view.openPlayerPageById(teamId),
     "/team/:teamId": ({ teamId }) => nba.view.openTeamPagebyId(teamId),
-    "/cart": nba.view.openCartPage,
     "/nba": nba.view.openNbaPage,
     "/teams": nba.view.openTeamsPage,
     "/": nba.view.openTeamsPage

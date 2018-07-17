@@ -29,13 +29,13 @@ export const ViewStore = types
             debugger
             return self.isLoading || !self.selectedTeamId
                 ? null
-                : self.shop.teams.get(self.selectedTeamId)
+                : self.nba.teams.get(self.selectedTeamId)
         },
         get selectedPlayer() {
             debugger
             return self.isLoading || !self.selectedPlayerId
                 ? null
-                : self.shop.players.get(self.selectedPlayerId)
+                : self.nba.players.get(self.selectedPlayerId)
         }
     }))
     .actions(self => ({
@@ -43,7 +43,7 @@ export const ViewStore = types
             debugger
             self.page = "team"
             self.selectedTeamId =id
-            self.shop.updatePlayers(self.selectedTeamId)
+            self.nba.updatePlayers(self.selectedTeamId)
         },
         openNbaPage() {
             self.page = "nba"
@@ -52,7 +52,13 @@ export const ViewStore = types
             debugger
             self.page = "player"
             self.selectedPlayerId = player.player_id.toString()
-            self.shop.updatePlayerStats(self.selectedPlayerId)
+            self.nba.updatePlayerStats(self.selectedPlayerId)
+        },
+        openPlayerPageById(player) {
+            debugger
+            self.page = "player"
+            self.selectedPlayerId = player
+            self.nba.updatePlayerStats(self.selectedPlayerId)
         },
         openTeamsPage() {
             self.page = "teams"
@@ -62,6 +68,6 @@ export const ViewStore = types
             debugger
             self.page = "team"
             self.selectedTeamId =book.TEAM_ID.toString()
-            self.shop.updatePlayers(self.selectedTeamId)
+            self.nba.updatePlayers(self.selectedTeamId)
         }
     }))

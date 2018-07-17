@@ -122,7 +122,7 @@ class PersistentDrawer extends React.Component {
     const { classes, theme } = this.props;
     const { anchor, open } = this.state;
     const  nba  = this.props.nba
-    debugger
+    
     const drawer = (
       <Drawer
         variant="persistent"
