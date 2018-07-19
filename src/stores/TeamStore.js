@@ -5,13 +5,15 @@ export const Team = types.model("Team", {
     TEAM_ID: types.identifier(types.number),
     TEAM_NAME: types.string,
     Abbreviation:types.string,
-    photoUrl : types.optional(types.string, "")
+    photoUrl : types.optional(types.string, ""),
+    hrefUrl : types.optional(types.string, "")
 })
 
 export const TeamStore = types
     .model("TeamStore", {
         isLoading: true,
-        teams: types.map(Team)
+        teams: types.map(Team),
+        hrefUrl : "team"
     })
     .views(self => ({
         get shop() {
@@ -36,6 +38,7 @@ export const TeamStore = types
             json.forEach(teamJson => {
 
                 teamJson.photoUrl = 'https://stats.nba.com/media/img/teams/logos/' + teamJson.Abbreviation + '_logo.svg'
+                teamJson.hrefUrl = "team"
                 self.teams.put(teamJson)
             })
         }

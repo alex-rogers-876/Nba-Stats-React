@@ -15,7 +15,8 @@ export const Player = types.model("Player", {
     exp: types.string,
     school: types.string,
     player_id: types.identifier(types.number),
-    photoUrl : types.optional(types.string, "")
+    photoUrl : types.optional(types.string, ""),
+    hrefUrl : types.optional(types.string, "")
 })
 
 export const PlayerStore = types
@@ -61,6 +62,7 @@ export const PlayerStore = types
             values(self.players).forEach(book => (book))
             json.forEach(bookJson => {
                 bookJson.photoUrl = 'https://ak-static.cms.nba.com/wp-content/uploads/headshots/nba/latest/260x190/' + bookJson.player_id + '.png'
+                bookJson.hrefUrl = "player"
                 self.players.put(bookJson)
             })
         }
