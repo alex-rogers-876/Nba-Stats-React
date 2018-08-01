@@ -21,6 +21,8 @@ export const ViewStore = types
                     return "/teams"
                 case "team":
                     return "/team/" + self.selectedTeamId
+                case "player":
+                    return "/player/" + self.selectedPlayerId
                 default:
                     return "/404"
             }
